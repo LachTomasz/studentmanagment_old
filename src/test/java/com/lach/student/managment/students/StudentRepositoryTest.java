@@ -1,11 +1,22 @@
 package com.lach.student.managment.students;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import org.eclipse.collections.api.map;
+=======
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+>>>>>>> 2c65fdf (First profi projekt. Created with Gradle.)
 
 class StudentRepositoryTest {
 
@@ -75,6 +86,7 @@ class StudentRepositoryTest {
         Assertions.assertEquals(List.of(student1, student2, student3), result);
     }
 
+<<<<<<< HEAD
 //    @Test
 //    public void shouldUpdateStudent() {
 //
@@ -92,6 +104,26 @@ class StudentRepositoryTest {
 //        //then
 //        Assertions.assertEquals(student1, result);
 //    }
+=======
+    @Test
+    public void shouldUpdateStudent() {
+
+        //given
+        Student student1 = new Student("John", "Kowalski", "12343");
+        Student student2 = new Student("Jan","Bykowski","12345");
+
+        StudentRepository studentRepository = new StudentRepository(new HashMap<>());
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+        student1 = new Student("Jan","Bykowski","12345");
+
+        //when
+        Student result = studentRepository.update(student1);
+
+        //then
+        Assertions.assertEquals(student1, result);
+    }
+>>>>>>> 2c65fdf (First profi projekt. Created with Gradle.)
 
     @Test
     public void shouldDeleteStudent() {
@@ -99,6 +131,7 @@ class StudentRepositoryTest {
         Student student1 = new Student("John", "Kowalski", "12343");
         Student student2 = new Student("Bartek", "Musterman","23456");
 
+<<<<<<< HEAD
 //        Map<UUID, Student> students = Map.of(student1.getId(), student1,
 //                                                student2.getId(), student2);
 //        StudentRepository studentRepository = new StudentRepository(students);
@@ -107,6 +140,12 @@ class StudentRepositoryTest {
         StudentRepository studentRepository = new StudentRepository(new HashMap<>());
         studentRepository.save(student1);
         studentRepository.save(student2);
+=======
+        StudentRepository studentRepository = new StudentRepository(new HashMap<>());
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+
+>>>>>>> 2c65fdf (First profi projekt. Created with Gradle.)
         //when
         studentRepository.delete(student1.getId());
         //then
