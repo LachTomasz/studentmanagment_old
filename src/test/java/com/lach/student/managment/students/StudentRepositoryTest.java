@@ -1,11 +1,13 @@
 package com.lach.student.managment.students;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
-import org.eclipse.collections.api.map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 class StudentRepositoryTest {
 
@@ -75,23 +77,25 @@ class StudentRepositoryTest {
         Assertions.assertEquals(List.of(student1, student2, student3), result);
     }
 
-//    @Test
-//    public void shouldUpdateStudent() {
-//
-//        //given
-//        Student student1 = new Student(1, "John", "Kowalski", "12343");
-//        Student student2 = new Student(2,"Jan","Bykowski","12345");
-//        Map<Integer, Student> students = Map.of(1, student1,
-//                2, student2);
-//        StudentRepository studentRepository = new StudentRepository(students);
-//        student1 = new Student(1,"Jan","Bykowski","12345");
-//
-//        //when
-//        Student result = studentRepository.update(student1);
-//
-//        //then
-//        Assertions.assertEquals(student1, result);
-//    }
+
+    @Test
+    public void shouldUpdateStudent() {
+
+        //given
+        Student student1 = new Student("John", "Kowalski", "12343");
+        Student student2 = new Student("Jan","Bykowski","12345");
+
+        StudentRepository studentRepository = new StudentRepository(new HashMap<>());
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+        student1 = new Student("Jan","Bykowski","12345");
+
+        //when
+        Student result = studentRepository.update(student1);
+
+        //then
+        Assertions.assertEquals(student1, result);
+    }
 
     @Test
     public void shouldDeleteStudent() {
@@ -99,14 +103,16 @@ class StudentRepositoryTest {
         Student student1 = new Student("John", "Kowalski", "12343");
         Student student2 = new Student("Bartek", "Musterman","23456");
 
+
 //        Map<UUID, Student> students = Map.of(student1.getId(), student1,
 //                                                student2.getId(), student2);
 //        StudentRepository studentRepository = new StudentRepository(students);
-        StudentRepository studentRepository1 = MutableMap
+//        StudentRepository studentRepository1 = MutableMap
 
         StudentRepository studentRepository = new StudentRepository(new HashMap<>());
         studentRepository.save(student1);
         studentRepository.save(student2);
+
         //when
         studentRepository.delete(student1.getId());
         //then
