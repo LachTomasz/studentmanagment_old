@@ -42,7 +42,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void shouldUpdateCourse() {
+    void shouldUpdateCourse() { //todo ta sama zmiana w studencie
         //given
         Course course1 = new Course("Math");
         Course course2 = new Course("Physics");
@@ -52,13 +52,13 @@ class CourseRepositoryTest {
         courses.put(course2.getCourseID(), course2);
         CourseRepository courseRepository = new CourseRepository(courses);
 
-        course1 = new Course("Algebra");
+        Course updateCourse = new Course(course1.getCourseID(), "Algebra");
 
         //when
-        Course result = courseRepository.update(course1);
+        Course result = courseRepository.update(updateCourse);
 
         //then
-        assertEquals(course1, result);
+        assertEquals(updateCourse, result);
     }
 
     @Test

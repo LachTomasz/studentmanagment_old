@@ -15,19 +15,20 @@ public class CourseRepository {
         return idToCourse.get(course.getCourseID());
     }
 
-    // findById - it will be search an instance of object Course of CourseID number
-    public Course find(UUID CourseID) {
-        return idToCourse.get(CourseID);
-    }
-
     // update - replace instance of object Course
     public Course update(Course course) {
-        return idToCourse.put(course.getCourseID(), course);
+        idToCourse.replace(course.getCourseID(), course);
+        return course;
     }
 
     //delete - remove instance of object Course of CourseID number
     public void delete(UUID CourseID) {
         idToCourse.remove(CourseID);
+    }
+
+    // findById - it will be search an instance of object Course of CourseID number
+    public Course find(UUID CourseID) {
+        return idToCourse.get(CourseID);
     }
 
     //findAll - returns list of all Course with that same name

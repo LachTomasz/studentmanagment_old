@@ -60,8 +60,8 @@ class StudentRepositoryTest {
     public void shouldFindAllStudents(){
         //given
         Student student1 = new Student("John", "Kowalski", "12343");
-        Student student2 = new Student("John", "Kowalski", "12343");
-        Student student3 = new Student("Jan", "Kowalski", "12343");
+        Student student2 = new Student("John", "Muster", "12343");
+        Student student3 = new Student("Jan", "Nowak", "12343");
         Map<UUID, Student> students = Map.of(student1.getId(), student1,
                                                 student2.getId(), student2,
                                                 student3.getId(), student3);
@@ -85,16 +85,15 @@ class StudentRepositoryTest {
         HashMap<UUID, Student> students = new HashMap<>();
         students.put(student1.getId(), student1);
         students.put(student2.getId(), student2);
-
         StudentRepository studentRepository = new StudentRepository(students);
 
-        student1 = new Student("Jan","Bykowski","12345");
+        Student updateStudent = new Student(student1.getId(), "John", "Shmit", "12343");
 
         //when
-        Student result = studentRepository.update(student1);
+        Student result = studentRepository.update(updateStudent);
 
         //then
-        Assertions.assertEquals(student1, result);
+        Assertions.assertEquals(updateStudent, result);
     }
 
     @Test

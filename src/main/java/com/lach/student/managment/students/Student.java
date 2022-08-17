@@ -1,6 +1,8 @@
 package com.lach.student.managment.students;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,8 +13,12 @@ public class Student implements User {
     private final String lastName;
     private final String indexNumber;
 
-    public Student(String firstName, String lastName, String indexNumber) {
-        id = UUID.randomUUID();
+    public Student(@JsonProperty String firstName, @JsonProperty String lastName, @JsonProperty String indexNumber) {
+        this(UUID.randomUUID(), firstName, lastName, indexNumber);
+    }
+
+    public Student(@JsonProperty UUID id, @JsonProperty String firstName, @JsonProperty String lastName, @JsonProperty String indexNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.indexNumber = indexNumber;
@@ -53,6 +59,16 @@ public class Student implements User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, indexNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", indexNumber='" + indexNumber + '\'' +
+                '}';
     }
 
     @Override
