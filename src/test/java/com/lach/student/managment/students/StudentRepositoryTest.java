@@ -4,10 +4,7 @@ package com.lach.student.managment.students;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 class StudentRepositoryTest {
 
@@ -85,9 +82,12 @@ class StudentRepositoryTest {
         Student student1 = new Student("John", "Kowalski", "12343");
         Student student2 = new Student("Jan","Bykowski","12345");
 
-        StudentRepository studentRepository = new StudentRepository(new HashMap<>());
-        studentRepository.save(student1);
-        studentRepository.save(student2);
+        HashMap<UUID, Student> students = new HashMap<>();
+        students.put(student1.getId(), student1);
+        students.put(student2.getId(), student2);
+
+        StudentRepository studentRepository = new StudentRepository(students);
+
         student1 = new Student("Jan","Bykowski","12345");
 
         //when
@@ -103,15 +103,10 @@ class StudentRepositoryTest {
         Student student1 = new Student("John", "Kowalski", "12343");
         Student student2 = new Student("Bartek", "Musterman","23456");
 
-
-//        Map<UUID, Student> students = Map.of(student1.getId(), student1,
-//                                                student2.getId(), student2);
-//        StudentRepository studentRepository = new StudentRepository(students);
-//        StudentRepository studentRepository1 = MutableMap
-
-        StudentRepository studentRepository = new StudentRepository(new HashMap<>());
-        studentRepository.save(student1);
-        studentRepository.save(student2);
+        HashMap<UUID, Student> idToStudent = new HashMap<>();
+        idToStudent.put(student1.getId(), student1);
+        idToStudent.put(student2.getId(), student2);
+        StudentRepository studentRepository = new StudentRepository(idToStudent);
 
         //when
         studentRepository.delete(student1.getId());
