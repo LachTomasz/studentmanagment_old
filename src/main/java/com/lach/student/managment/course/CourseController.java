@@ -26,13 +26,15 @@ public class CourseController {
     }
 
     @DeleteMapping("/courses/{id}")
-    public void deleteCourse(@PathVariable("id") UUID id ){
-        idToCourse.remove(id);
+    public void deleteCourse(@PathVariable("id") String id ){
+        UUID courseId = UUID.fromString(id);
+        idToCourse.remove(courseId);
     }
 
     @GetMapping("courses/{id}")
-    public Course getCourse(@PathVariable("id") UUID id){
-        return idToCourse.get(id);
+    public Course getCourse(@PathVariable("id") String id){
+        UUID courseId = UUID.fromString(id);
+        return idToCourse.get(courseId);
     }
 
     @GetMapping("/courses")
