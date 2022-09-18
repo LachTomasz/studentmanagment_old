@@ -20,23 +20,25 @@ public class StudentController {
     }
 
     @PutMapping("/students")
-    public Student updateStudent(@RequestBody Student studnet){
-        idToStudent.replace(studnet.getId(), studnet);
-        return studnet;
+    public Student updateStudent(@RequestBody Student student){
+        idToStudent.replace(student.getId(), student);
+        return student;
     }
 
     @DeleteMapping("/students/{id}")
-    public void deleteStudent(@PathVariable("id")UUID id){
-        idToStudent.remove(id);
+    public void deleteStudent(@PathVariable("id")String id){
+        UUID studentId = UUID.fromString(id);
+        idToStudent.remove(studentId);
     }
 
     @GetMapping("students/{id}")
-    public Student getStudent(@PathVariable("id") UUID id){
-        return idToStudent.get(id);
+    public Student getStudent(@PathVariable("id") String id){
+        UUID studentID = UUID.fromString(id);
+        return idToStudent.get(studentID);
     }
 
     @GetMapping("/students")
-    public Collection<Student> getAllStudents(@RequestParam(value = "lastnName", required = false) String lastName){
+    public Collection<Student> getAllStudents(@RequestParam(value = "lastName", required = false) String lastName){
         if(lastName != null)  return idToStudent.values().stream()
                 .filter((student) -> student.getLastName().equals(lastName))
                 .collect(Collectors.toList());

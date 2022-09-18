@@ -9,7 +9,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -89,9 +91,44 @@ class CourseControllerTest {
     @Test
     void shouldGetAllCourses() {
         //Given
+        String url = "http://localhost:" + port + "/courses";
+        Course course1 = new Course("Math");
+        Course course2 = new Course("Physic");
+        Course course3 = new Course("Algebra");
+        restTemplate.postForEntity(url, course1, Course.class);
+        restTemplate.postForEntity(url, course2, Course.class);
+        restTemplate.postForEntity(url, course3, Course.class);
+        Course[] idToCourses = new Course[]{course1,course2,course3};
 
         //When
+        ResponseEntity<Course[]> result = restTemplate.getForEntity(url, Course[].class);
 
         //Then
+        Assertions.assertTrue(result.getStatusCode().is2xxSuccessful());
+        Assertions.assertArrayEquals(result.getBody(), idToCourses);
+    }
+
+    @Test
+    void shouldGetAllCoursesByName(){
+        //Given
+        String url = "http://localhost:" + port + "/courses";
+        URI uri = UriComponentsBuilder.fromHttpUrl(url).queryParam("name", "Math").build().toUri();
+        Course course1 = new Course("Math");
+        Course course2 = new Course("Physic");
+        Course course3 = new Course("Algebra");
+        Course course4 = new Course("Math");
+
+        restTemplate.postForEntity(url, course1, Course.class);
+        restTemplate.postForEntity(url, course2, Course.class);
+        restTemplate.postForEntity(url, course3, Course.class);
+        restTemplate.postForEntity(url, course4, Course.class);
+        Course[] courseBySameName = new Course[]{course1, course4};
+
+        //When
+        ResponseEntity<Course[]> result = restTemplate.getForEntity(uri, Course[].class);
+
+        //Then
+        Assertions.assertTrue(result.getStatusCode().is2xxSuccessful());
+        Assertions.assertArrayEquals(result.getBody(), courseBySameName);
     }
 }

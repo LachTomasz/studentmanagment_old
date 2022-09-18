@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Student implements User {
+public class Student /*implements User*/ {
 
     private final UUID id;
     private final String firstName;
@@ -71,8 +71,8 @@ public class Student implements User {
                 '}';
     }
 
-    @Override
-    public int getType() {
-        return 0;
-    }
+//    @Override
+//    public int getType() {
+//        return 0;
+//    }
 }

@@ -1,7 +1,10 @@
 package com.lach.student.managment.course;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.*;
 
+@Repository
 public class CourseRepository {
 
     private final Map<UUID, Course> idToCourse;
